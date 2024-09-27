@@ -1,10 +1,15 @@
 class Solution(object):
     def isValid(self, s):
-        stack = []
-        for c in s:
-            if c in '({[':
-                stack.append(c)
-            
-
-if __name__ == "__main__":
-    print(Solution.isValid())
+        lis = []
+        for i in s:
+            if i == "(" or i == "{" or i == "[":
+                lis.append(i)
+            else:
+                if not lis:
+                    return False
+                if (i == ")" and lis[-1] != "(") or \
+                   (i == "}" and lis[-1] != "{") or \
+                   (i == "]" and lis[-1] != "["):
+                    return False
+                lis.pop()
+        return len(lis) == 0
